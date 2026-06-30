@@ -6,7 +6,7 @@
     <title>ComplyOS | The Agentic Compliance Operating System</title>
     
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237e22ce' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'/></svg>" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjN2UyMmNlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIxIDE2VjhhMiAyIDAgMCAwLTEtMS43M2wtNy00YTIgMiAwIDAgMC0yIDBsLTcgNEEyIDIgMCAwIDAgMyA4djhhMiAyIDAgMCAwIDEgMS43M2w3IDRhMiAyIDAgMCAwIDIgMGw3LTRBMiAyIDAgMCAwIDIxIDE2eiIvPjwvc3ZnPg==" type="image/svg+xml">
     
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -416,6 +416,9 @@
         /* Utilities */
         .bg-lighter { background: var(--bg-lighter); }
 
+        .github-img { transition: filter 0.3s ease; }
+        [data-theme="dark"] .github-img { filter: invert(1) brightness(2); }
+
         footer {
             padding: 2rem 0;
             border-top: 1px solid var(--glass-border);
@@ -446,11 +449,6 @@
                         <button class="theme-toggle" id="theme-toggle" title="Toggle Theme">
                             <i data-lucide="moon" id="theme-icon"></i>
                         </button>
-                    </li>
-                    <li class="nav-item ms-2">
-                        <a href="https://github.com/maheshmorde" target="_blank" class="theme-toggle text-decoration-none" title="GitHub Repository">
-                            <i data-lucide="github"></i>
-                        </a>
                     </li>
                     <li class="nav-item ms-2">
                         <a href="#summary" class="btn btn-premium btn-sm px-4">TechSprint Submission</a>
@@ -1112,6 +1110,12 @@
                                         <span class="chip border-accent">Vector Database</span>
                                     </div>
                                 </div>
+
+                                <div class="mt-4 pt-4" style="border-top: 1px solid var(--glass-border);">
+                                    <a href="https://github.com/maheshmorde" target="_blank" class="text-primary-brand text-decoration-none d-flex align-items-center gap-2" style="font-weight: 500;">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" width="24" height="24" class="github-img"> View Repository
+                                    </a>
+                                </div>
                             </div>
                             
                         </div>
@@ -1144,7 +1148,7 @@
                 Made with ❤️ by <strong class="text-primary">Mahesh Morde</strong> • <i data-lucide="phone" size="14" class="ms-1 me-1"></i> +91 9766228503
             </p>
             <a href="https://github.com/maheshmorde" target="_blank" class="text-secondary text-decoration-none d-inline-flex align-items-center gap-2 hover-primary transition">
-                <i data-lucide="github" size="18"></i> GitHub Profile
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" width="18" height="18" class="github-img"> GitHub Profile
             </a>
         </div>
     </footer>
@@ -1152,6 +1156,9 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        [data-theme='dark'] .github-img { filter: invert(1); }
+    </style>
     <script>
         // Initialize Icons
         lucide.createIcons();
