@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComplyOS | The Agentic Compliance Operating System</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- AOS CSS for Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root {
+            /* Light Theme (Default) - Purple & Yellow Gradient */
+            --bg-primary: #f8fafc;
+            --bg-lighter: #ffffff;
+            --primary-color: #7e22ce; /* Purple */
+            --primary-light: #9333ea;
+            --accent-color: #eab308; /* Yellow */
+            --accent-light: #facc15;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-inverse: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(148, 163, 184, 0.2);
+            --glass-hover: rgba(255, 255, 255, 0.9);
+            --nav-bg: rgba(248, 250, 252, 0.85);
+            
+            --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            --gradient-hero: radial-gradient(circle, rgba(126,34,206,0.1) 0%, rgba(248,250,252,0) 60%);
+            --gradient-hero-2: radial-gradient(circle, rgba(234,179,8,0.1) 0%, rgba(248,250,252,0) 60%);
+            
+            --font-sans: 'Inter', sans-serif;
+            --font-display: 'Outfit', sans-serif;
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme (Graphite & Cyan/Indigo) */
+            --bg-primary: #0a0a0c;
+            --bg-lighter: #131316;
+            --primary-color: #4f46e5;
+            --primary-light: #6366f1;
+            --accent-color: #00e5ff;
+            --accent-light: #67e8f9;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-inverse: #0f172a;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --glass-hover: rgba(255, 255, 255, 0.05);
+            --nav-bg: rgba(10, 10, 12, 0.85);
+            
+            --gradient-primary: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-color) 100%);
+            --gradient-hero: radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(0,0,0,0) 60%);
+            --gradient-hero-2: radial-gradient(circle, rgba(0,229,255,0.08) 0%, rgba(0,0,0,0) 60%);
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6, .display-font {
+            font-family: var(--font-display);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        /* Typography Utilities */
+        .text-gradient {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .text-gradient-primary {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-secondary { color: var(--text-secondary) !important; }
+        .text-accent { color: var(--accent-color) !important; }
+        .text-primary-brand { color: var(--primary-color) !important; }
+        .text-success { color: var(--success-color) !important; }
+        .text-warning { color: var(--warning-color) !important; }
+        .text-error { color: var(--error-color) !important; }
+
+        /* Glassmorphism */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card:hover {
+            background: var(--glass-hover);
+            transform: translateY(-5px);
+            border-color: rgba(126, 34, 206, 0.12);
+            box-shadow: 0 15px 40px -10px rgba(126, 34, 206, 0.15);
+        }
+
+        /* Navigation */
+        .navbar {
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1.2rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -0.03em;
+            color: var(--text-primary) !important;
+        }
+
+        .nav-link {
+            color: var(--text-secondary) !important;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary) !important;
+        }
+
+        /* Buttons */
+        .btn-premium {
+            background: var(--gradient-primary);
+            color: white !important;
+            border: none;
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-premium::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(126, 34, 206, 0.4);
+        }
+
+        .btn-premium:hover::before {
+            opacity: 1;
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--glass-hover);
+        }
+
+        /* Layout & Spacing */
+        section {
+            padding: 140px 0;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 5rem;
+        }
+
+        .section-subtitle {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            display: block;
+            margin-bottom: 1.2rem;
+        }
+
+        /* Hero Section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 100px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .hero-blob {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: var(--gradient-hero);
+            top: -200px;
+            right: -100px;
+            border-radius: 50%;
+            animation: pulse 12s infinite alternate;
+        }
+
+        .hero-blob-2 {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            background: var(--gradient-hero-2);
+            bottom: -200px;
+            left: -200px;
+            border-radius: 50%;
+            animation: pulse 15s infinite alternate-reverse;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1) translate(0, 0); opacity: 0.5; }
+            100% { transform: scale(1.1) translate(-20px, 20px); opacity: 1; }
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 8vw, 6.5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Timelines & Workflows */
+        .workflow-step {
+            position: relative;
+            padding: 1.5rem 2rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .workflow-arrow {
+            text-align: center;
+            color: var(--text-secondary);
+            opacity: 0.5;
+            margin: 1rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Agent Cards */
+        .agent-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(126, 34, 206, 0.05);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(126, 34, 206, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .glass-card:hover .agent-icon {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* Metric Cards */
+        .metric-value {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+            opacity: 0.5;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-10px) translateX(-50%); }
+            60% { transform: translateY(-5px) translateX(-50%); }
+        }
+
+        /* SVG Connectors */
+        .svg-connector {
+            stroke-dasharray: 20;
+            animation: dash 30s linear infinite;
+        }
+        
+        @keyframes dash {
+            to { stroke-dashoffset: -1000; }
+        }
+        
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.35rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Roadmap Timeline */
+        .roadmap-timeline {
+            position: relative;
+            padding-left: 3rem;
+            margin: 2rem 0;
+        }
+        
+        .roadmap-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient-primary);
+            opacity: 0.3;
+        }
+
+        .roadmap-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .roadmap-dot {
+            position: absolute;
+            left: -3.4rem;
+            top: 0.2rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 3px solid var(--accent-color);
+        }
+
+        /* Utilities */
+        .bg-lighter { background: var(--bg-lighter); }
+
+        footer {
+            padding: 2rem 0;
+            border-top: 1px solid var(--glass-border);
+            background: var(--bg-lighter);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <i data-lucide="hexagon" class="text-primary-brand"></i>
+                COMPLYOS
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i data-lucide="menu" class="text-primary"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center gap-4">
+                    <li class="nav-item"><a class="nav-link" href="#problem">The Crisis</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#vision">Vision</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#agents">AI Agents</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#architecture">Architecture</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#impact">Impact</a></li>
+                    <li class="nav-item ms-2">
+                        <button class="theme-toggle" id="theme-toggle" title="Toggle Theme">
+                            <i data-lucide="moon" id="theme-icon"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a href="#summary" class="btn btn-premium btn-sm px-4">TechSprint Submission</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECTION 1: Hero -->
+    <section id="hero">
+        <div class="hero-bg">
+            <div class="hero-blob"></div>
+            <div class="hero-blob-2"></div>
+        </div>
+        <div class="container text-center position-relative z-1">
+            <div class="row justify-content-center">
+                <div class="col-lg-10" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="chip mb-4 mx-auto" style="border-color: rgba(126,34,206,0.3); background: rgba(126,34,206,0.05);">
+                        <span class="text-primary-brand me-2">●</span> SEBI Securities Market TechSprint 2026
+                    </div>
+                    <h1 class="hero-title text-gradient">COMPLYOS</h1>
+                    <h2 class="display-6 mb-4 text-primary fw-light">The Agentic Compliance Operating System</h2>
+                    <p class="lead text-secondary mb-3 mx-auto" style="max-width: 800px; font-size: 1.3rem;">
+                        Transforming complex SEBI regulations into structured, explainable, machine-actionable and auditable operational workflows using Agentic AI.
+                    </p>
+                    <p class="text-secondary small fw-bold mb-5">
+                        <i data-lucide="info" size="14" class="me-1 mb-1"></i> Note: We will use <span class="text-error">Angular</span> to build this product in the future. This is a conceptual presentation.
+                    </p>
+                    <a href="#problem" class="btn btn-premium btn-lg">Explore Vision</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span style="font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;">Scroll</span>
+            <i data-lucide="chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- SECTION 2: The Compliance Crisis -->
+    <section id="problem">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-subtitle">Current Landscape</span>
+                <h2>The Compliance Crisis</h2>
+                <p class="text-secondary mt-3 mx-auto" style="max-width: 600px;">
+                    The journey from reading a regulatory PDF to ensuring organizational compliance is fundamentally broken.
+                </p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            
+                            <div class="workflow-step w-100 justify-content-center border-0 bg-transparent mb-0 shadow-none">
+                                <div class="text-primary-brand"><i data-lucide="file-text" size="32"></i></div>
+                                <div><h5 class="mb-0 text-primary">New SEBI Circular PDF</h5></div>
+                            </div>
+                            
+                            <div class="workflow-arrow"><i data-lucide="arrow-down"></i></div>
+                            
+                            <div class="workflow-step w-100 justify-content-center mb-0 shadow-sm">
+                                <div><i data-lucide="glasses" class="text-secondary"></i></div>
+                                <div><h6 class="mb-0">Manual Interpretation by Legal Team</h6></div>
+                            </div>
+
+                            <div class="workflow-arrow"><i data-lucide="arrow-down"></i></div>
+
+                            <div class="workflow-step w-100 justify-content-center mb-0 shadow-sm">
+                                <div><i data-lucide="file-spreadsheet" class="text-secondary"></i></div>
+                                <div><h6 class="mb-0">Excel Tracking & Email Chains</h6></div>
+                            </div>
+
+                            <div class="workflow-arrow"><i data-lucide="arrow-down"></i></div>
+
+                            <div class="workflow-step w-100 justify-content-center border-0 bg-transparent mb-0 shadow-none">
+                                <div class="text-error"><i data-lucide="alert-octagon" size="32"></i></div>
+                                <div><h5 class="mb-0 text-error">Missed Deadlines & Audit Pressure</h5></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Why Existing Compliance Fails -->
+    <section id="comparison" class="bg-lighter">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-subtitle">The Paradigm Shift</span>
+                <h2>Traditional vs. ComplyOS</h2>
+            </div>
+            
+            <div class="row g-5">
+                <!-- Traditional -->
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="glass-card h-100">
+                        <h4 class="mb-5 text-secondary d-flex align-items-center gap-3">
+                            <i data-lucide="x-octagon"></i> Traditional Compliance
+                        </h4>
+                        <ul class="list-unstyled">
+                            <li class="mb-4 d-flex align-items-start gap-3">
+                                <i data-lucide="x" class="text-error mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h6 class="mb-1">Manual Reading</h6>
+                                    <p class="text-secondary small mb-0">Hours spent parsing dense legal texts.</p>
+                                </div>
+                            </li>
+                            <li class="mb-4 d-flex align-items-start gap-3">
+                                <i data-lucide="x" class="text-error mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h6 class="mb-1">Human Dependency</h6>
+                                    <p class="text-secondary small mb-0">Subjective interpretations leading to inconsistencies.</p>
+                                </div>
+                            </li>
+                            <li class="mb-4 d-flex align-items-start gap-3">
+                                <i data-lucide="x" class="text-error mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h6 class="mb-1">Scattered Execution</h6>
+                                    <p class="text-secondary small mb-0">Lost in emails, mapped in static Excel sheets.</p>
+                                </div>
+                            </li>
+                            <li class="mb-4 d-flex align-items-start gap-3">
+                                <i data-lucide="x" class="text-error mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h6 class="mb-1">Reactive Stance</h6>
+                                    <p class="text-secondary small mb-0">Scrambling for evidence only when an audit occurs.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ComplyOS -->
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="glass-card h-100" style="border-color: rgba(126, 34, 206, 0.4); background: rgba(126, 34, 206, 0.03);">
+                        <h4 class="mb-5 text-gradient-primary d-flex align-items-center gap-3">
+                            <i data-lucide="check-circle-2"></i> ComplyOS
+                        </h4>
+                        <ul class="list-unstyled">
+                            <li class="mb-4 d-flex align-items-start gap-3">
+                                <i data-lucide="bot" class="text-success mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h6 class="mb-1 text-primary">AI Reads & Understands</h6>
+                                    <p class="text-secondary small mb-0">Instant structural parsing of regulatory text.</p>
+                                </div>
+                            </li>
+                            <li class="mb-4 d-flex align-items-start gap-3">
+                                <i data-lucide="brain-circuit" class="text-success mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h6 class="mb-1 text-primary">AI Reasons</h6>
+                                    <p class="text-secondary small mb-0">LLMs map obligations to specific impacted departments.</p>
+                                </div>
+                            </li>
+                            <li class="mb-4 d-flex align-items-start gap-3">
+                                <i data-lucide="workflow" class="text-success mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h6 class="mb-1 text-primary">AI Generates Workflow</h6>
+                                    <p class="text-secondary small mb-0">Autonomous creation of tasks and SOP assignments.</p>
+                                </div>
+                            </li>
+                            <li class="mb-4 d-flex align-items-start gap-3">
+                                <i data-lucide="shield-check" class="text-success mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h6 class="mb-1 text-primary">AI Generates Audit Trail</h6>
+                                    <p class="text-secondary small mb-0">Proactive, immutable evidence collection in real-time.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: The Vision -->
+    <section id="vision">
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-9" data-aos="zoom-in">
+                    <i data-lucide="sparkles" size="48" class="text-accent mb-4"></i>
+                    <h2 class="display-4 mb-4">Regulations are code.<br>Treat them accordingly.</h2>
+                    <p class="lead text-secondary mx-auto mb-5" style="max-width: 800px;">
+                        Why Agentic AI? Because regulations require logic, reasoning, and context—not just keyword searches. 
+                        ComplyOS bridges the gap between legal semantics and operational execution, treating regulatory texts as programmable workflows.
+                    </p>
+                    <div class="d-flex justify-content-center gap-4 flex-wrap">
+                        <div class="glass-card px-4 py-3 text-center border-0" style="background: rgba(148,163,184,0.05)">
+                            <i data-lucide="zap" class="text-warning mb-2"></i><br>
+                            <span class="small fw-bold">Automated</span>
+                        </div>
+                        <div class="glass-card px-4 py-3 text-center border-0" style="background: rgba(148,163,184,0.05)">
+                            <i data-lucide="shield" class="text-primary-brand mb-2"></i><br>
+                            <span class="small fw-bold">Defensible</span>
+                        </div>
+                        <div class="glass-card px-4 py-3 text-center border-0" style="background: rgba(148,163,184,0.05)">
+                            <i data-lucide="eye" class="text-accent mb-2"></i><br>
+                            <span class="small fw-bold">Transparent</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: Meet Your AI Compliance Workforce -->
+    <section id="agents" class="bg-lighter">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-subtitle">Multi-Agent Architecture</span>
+                <h2>Meet Your AI Workforce</h2>
+                <p class="text-secondary mt-3 mx-auto" style="max-width: 600px;">
+                    Specialized AI agents working collaboratively to orchestrate your entire compliance lifecycle.
+                </p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Agent 1 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card h-100">
+                        <div class="agent-icon"><i data-lucide="file-search"></i></div>
+                        <h5 class="mb-3">Regulation Agent</h5>
+                        <p class="text-secondary small mb-4">Continuously reads SEBI circulars, extracting distinct legal obligations and actionable clauses.</p>
+                        <span class="text-accent small fw-bold"><i data-lucide="arrow-right" size="14" class="me-1"></i>Business Value: Accuracy</span>
+                    </div>
+                </div>
+                <!-- Agent 2 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card h-100">
+                        <div class="agent-icon"><i data-lucide="scale"></i></div>
+                        <h5 class="mb-3">Interpretation Agent</h5>
+                        <p class="text-secondary small mb-4">Translates legal text into operational context, identifying exactly which departments are impacted.</p>
+                        <span class="text-accent small fw-bold"><i data-lucide="arrow-right" size="14" class="me-1"></i>Business Value: Clarity</span>
+                    </div>
+                </div>
+                <!-- Agent 3 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="glass-card h-100">
+                        <div class="agent-icon"><i data-lucide="git-merge"></i></div>
+                        <h5 class="mb-3">Workflow Agent</h5>
+                        <p class="text-secondary small mb-4">Synthesizes interpreted rules into executable Standard Operating Procedures and assigns tasks.</p>
+                        <span class="text-accent small fw-bold"><i data-lucide="arrow-right" size="14" class="me-1"></i>Business Value: Execution</span>
+                    </div>
+                </div>
+                <!-- Agent 4 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="glass-card h-100">
+                        <div class="agent-icon"><i data-lucide="activity"></i></div>
+                        <h5 class="mb-3">Risk Agent</h5>
+                        <p class="text-secondary small mb-4">Monitors task execution in real-time, calculates risk scores, and detects potential compliance gaps.</p>
+                        <span class="text-accent small fw-bold"><i data-lucide="arrow-right" size="14" class="me-1"></i>Business Value: Mitigation</span>
+                    </div>
+                </div>
+                <!-- Agent 5 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="glass-card h-100">
+                        <div class="agent-icon"><i data-lucide="shield-check"></i></div>
+                        <h5 class="mb-3">Audit Agent</h5>
+                        <p class="text-secondary small mb-4">Collects evidence autonomously and maintains an immutable, cryptographically secure audit trail.</p>
+                        <span class="text-accent small fw-bold"><i data-lucide="arrow-right" size="14" class="me-1"></i>Business Value: Defensibility</span>
+                    </div>
+                </div>
+                <!-- Agent 6 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="glass-card h-100">
+                        <div class="agent-icon"><i data-lucide="message-square"></i></div>
+                        <h5 class="mb-3">Compliance Copilot</h5>
+                        <p class="text-secondary small mb-4">Conversational interface for officers to query regulations, ask for summaries, and get recommendations.</p>
+                        <span class="text-accent small fw-bold"><i data-lucide="arrow-right" size="14" class="me-1"></i>Business Value: Speed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6 & 11: How ComplyOS Works (Enterprise Architecture) -->
+    <section id="architecture">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-subtitle">Enterprise Architecture</span>
+                <h2>How ComplyOS Works</h2>
+            </div>
+            
+            <div class="glass-card p-5" data-aos="zoom-in">
+                <div class="row align-items-center justify-content-center text-center">
+                    
+                    <div class="col-12 d-flex flex-column align-items-center">
+                        
+                        <div class="glass-card px-5 py-3 mb-4 text-primary" style="border-color: rgba(148,163,184,0.4); background: rgba(148,163,184,0.05);">
+                            <i data-lucide="file-text" class="mb-2"></i><br>
+                            <span class="fw-bold">SEBI Circular (Input)</span>
+                        </div>
+                        
+                        <svg width="2" height="40" class="mb-4">
+                            <line x1="1" y1="0" x2="1" y2="40" stroke="var(--primary-color)" stroke-width="2" class="svg-connector"/>
+                        </svg>
+
+                        <div class="glass-card w-100 p-4 mb-4" style="background: rgba(126, 34, 206, 0.05); border-color: rgba(126, 34, 206, 0.2);">
+                            <h5 class="text-primary-brand mb-4">Agent Orchestrator Core</h5>
+                            <div class="row g-3">
+                                <div class="col-md-3"><div class="chip w-100 justify-content-center py-2"><i data-lucide="cpu" class="me-2 text-secondary" size="16"></i> LLM</div></div>
+                                <div class="col-md-3"><div class="chip w-100 justify-content-center py-2"><i data-lucide="database" class="me-2 text-secondary" size="16"></i> RAG</div></div>
+                                <div class="col-md-3"><div class="chip w-100 justify-content-center py-2"><i data-lucide="network" class="me-2 text-secondary" size="16"></i> Knowledge Graph</div></div>
+                                <div class="col-md-3"><div class="chip w-100 justify-content-center py-2"><i data-lucide="workflow" class="me-2 text-secondary" size="16"></i> Workflow Engine</div></div>
+                            </div>
+                        </div>
+
+                        <svg width="2" height="40" class="mb-4">
+                            <line x1="1" y1="0" x2="1" y2="40" stroke="var(--accent-color)" stroke-width="2" class="svg-connector"/>
+                        </svg>
+
+                        <div class="row w-100 justify-content-center g-4 mb-4">
+                            <div class="col-md-4">
+                                <div class="glass-card p-4 h-100">
+                                    <i data-lucide="layout-dashboard" class="text-accent mb-3"></i>
+                                    <h6>Compliance Dashboard</h6>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="glass-card p-4 h-100" style="border-color: rgba(16, 185, 129, 0.3);">
+                                    <i data-lucide="shield-check" class="text-success mb-3"></i>
+                                    <h6>Immutable Audit Trail</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: Real Compliance Journey -->
+    <section id="journey" class="bg-lighter">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-subtitle">Real-world Scenario</span>
+                <h2>The Compliance Journey</h2>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="position-relative">
+                        <!-- Timeline Line -->
+                        <div style="position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background: rgba(148,163,184,0.2); z-index: 0;"></div>
+                        
+                        <!-- Steps -->
+                        <div class="d-flex mb-5 position-relative z-1" data-aos="fade-left" data-aos-delay="0">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center border" style="width: 50px; height: 50px; flex-shrink: 0; border-color: var(--primary-color) !important; background: var(--bg-primary) !important;">
+                                <i data-lucide="bell" class="text-primary-brand"></i>
+                            </div>
+                            <div class="ms-4 glass-card p-4 w-100 shadow-sm">
+                                <h5 class="mb-2">1. Circular Released & Detected</h5>
+                                <p class="text-secondary mb-0">ComplyOS ingests a new SEBI circular immediately upon publication.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-5 position-relative z-1" data-aos="fade-left" data-aos-delay="100">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center border" style="width: 50px; height: 50px; flex-shrink: 0; border-color: var(--accent-color) !important; background: var(--bg-primary) !important;">
+                                <i data-lucide="brain-circuit" class="text-accent"></i>
+                            </div>
+                            <div class="ms-4 glass-card p-4 w-100 shadow-sm">
+                                <h5 class="mb-2">2. Obligation Extraction</h5>
+                                <p class="text-secondary mb-0">Agents extract specific obligations and identify affected internal teams (e.g., IT, Risk).</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-5 position-relative z-1" data-aos="fade-left" data-aos-delay="200">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center border" style="width: 50px; height: 50px; flex-shrink: 0; border-color: var(--warning-color) !important; background: var(--bg-primary) !important;">
+                                <i data-lucide="workflow" class="text-warning"></i>
+                            </div>
+                            <div class="ms-4 glass-card p-4 w-100 shadow-sm">
+                                <h5 class="mb-2">3. Task Creation & Assignment</h5>
+                                <p class="text-secondary mb-0">Compliance tasks are auto-generated and routed to responsible owners with deadlines.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex position-relative z-1" data-aos="fade-left" data-aos-delay="300">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center border" style="width: 50px; height: 50px; flex-shrink: 0; border-color: var(--success-color) !important; background: var(--bg-primary) !important;">
+                                <i data-lucide="shield-check" class="text-success"></i>
+                            </div>
+                            <div class="ms-4 glass-card p-4 w-100 shadow-sm" style="border-color: rgba(16, 185, 129, 0.3);">
+                                <h5 class="mb-2">4. Audit Trail Generation</h5>
+                                <p class="text-secondary mb-0">As teams complete tasks, evidence is collected to generate a complete compliance report.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: Key Features -->
+    <section id="features">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-subtitle">Platform Capabilities</span>
+                <h2>Key Features</h2>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card text-center h-100 p-4">
+                        <i data-lucide="bot" class="text-primary-brand mb-3" size="32"></i>
+                        <h6 class="mb-0">Agentic AI</h6>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="glass-card text-center h-100 p-4">
+                        <i data-lucide="book-open" class="text-primary-brand mb-3" size="32"></i>
+                        <h6 class="mb-0">Regulatory Intel</h6>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card text-center h-100 p-4">
+                        <i data-lucide="settings" class="text-primary-brand mb-3" size="32"></i>
+                        <h6 class="mb-0">Workflow Auto</h6>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="250">
+                    <div class="glass-card text-center h-100 p-4">
+                        <i data-lucide="shield" class="text-primary-brand mb-3" size="32"></i>
+                        <h6 class="mb-0">Audit Trail</h6>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="glass-card text-center h-100 p-4">
+                        <i data-lucide="alert-triangle" class="text-primary-brand mb-3" size="32"></i>
+                        <h6 class="mb-0">Risk Scoring</h6>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="350">
+                    <div class="glass-card text-center h-100 p-4">
+                        <i data-lucide="search" class="text-primary-brand mb-3" size="32"></i>
+                        <h6 class="mb-0">Explainable AI</h6>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="glass-card text-center h-100 p-4">
+                        <i data-lucide="database" class="text-primary-brand mb-3" size="32"></i>
+                        <h6 class="mb-0">Knowledge Base</h6>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="450">
+                    <div class="glass-card text-center h-100 p-4">
+                        <i data-lucide="history" class="text-primary-brand mb-3" size="32"></i>
+                        <h6 class="mb-0">Version History</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 9: Business Impact -->
+    <section id="impact" class="bg-lighter">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-subtitle">The ROI</span>
+                <h2>Business Impact</h2>
+            </div>
+            
+            <div class="row g-4 text-center">
+                <!-- Reduces -->
+                <div class="col-md-6" data-aos="fade-right">
+                    <div class="glass-card h-100">
+                        <h5 class="text-success mb-5"><i data-lucide="trending-down" class="me-2"></i> Reduce</h5>
+                        <div class="row g-4">
+                            <div class="col-6">
+                                <div class="metric-value">70%</div>
+                                <div class="text-secondary small fw-bold text-uppercase">Manual Effort</div>
+                            </div>
+                            <div class="col-6">
+                                <div class="metric-value">90%</div>
+                                <div class="text-secondary small fw-bold text-uppercase">Audit Prep Time</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Increases -->
+                <div class="col-md-6" data-aos="fade-left">
+                    <div class="glass-card h-100">
+                        <h5 class="text-accent mb-5"><i data-lucide="trending-up" class="me-2"></i> Increase</h5>
+                        <div class="row g-4">
+                            <div class="col-6">
+                                <div class="metric-value">100%</div>
+                                <div class="text-secondary small fw-bold text-uppercase">Audit Readiness</div>
+                            </div>
+                            <div class="col-6">
+                                <div class="metric-value">10x</div>
+                                <div class="text-secondary small fw-bold text-uppercase">Tracing Speed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 12: Alignment with SEBI Objectives -->
+    <section id="alignment">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-subtitle">Strategic Goals</span>
+                <h2>Alignment with SEBI</h2>
+            </div>
+            
+            <div class="row justify-content-center g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card text-center h-100 p-4">
+                        <i data-lucide="shield" class="text-primary-brand mb-3" size="40"></i>
+                        <h5>Investor Protection</h5>
+                        <p class="text-secondary small mb-0">Ensuring zero non-compliance means market participants remain robust and investors remain safe.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card text-center h-100 p-4">
+                        <i data-lucide="award" class="text-accent mb-3" size="40"></i>
+                        <h5>Regulatory Excellence</h5>
+                        <p class="text-secondary small mb-0">Promotes systemic trust through mathematical defensibility and structured data.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="glass-card text-center h-100 p-4">
+                        <i data-lucide="activity" class="text-success mb-3" size="40"></i>
+                        <h5>Operational Efficiency</h5>
+                        <p class="text-secondary small mb-0">Frees human capital from administrative drudgery to focus on actual risk management.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 13: Commercial Potential & SECTION 14: Roadmap -->
+    <section id="commercial" class="bg-lighter">
+        <div class="container">
+            <div class="row g-5">
+                
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="section-header mb-4">
+                        <span class="section-subtitle">Scalability</span>
+                        <h2>Commercial Potential</h2>
+                    </div>
+                    <p class="text-secondary mb-4">
+                        Designed as an Enterprise SaaS platform, ComplyOS is highly scalable and cloud-ready for the entire financial ecosystem.
+                    </p>
+                    
+                    <h6 class="mb-3 text-primary">Target Market Segments:</h6>
+                    <div class="d-flex flex-wrap gap-2 mb-4">
+                        <span class="chip">Stock Brokers</span>
+                        <span class="chip">Depositories</span>
+                        <span class="chip">Asset Management Cos</span>
+                        <span class="chip">Stock Exchanges</span>
+                        <span class="chip">Merchant Bankers</span>
+                        <span class="chip">Banks</span>
+                    </div>
+                </div>
+
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="section-header mb-4">
+                        <span class="section-subtitle">The Future</span>
+                        <h2>Product Roadmap</h2>
+                    </div>
+                    
+                    <div class="roadmap-timeline">
+                        <div class="roadmap-item">
+                            <div class="roadmap-dot"></div>
+                            <h6 class="mb-1">Phase 1: Idea & Vision</h6>
+                            <p class="text-secondary small">SEBI TechSprint Submission (Current)</p>
+                        </div>
+                        <div class="roadmap-item">
+                            <div class="roadmap-dot"></div>
+                            <h6 class="mb-1">Phase 2: Prototype Development</h6>
+                            <p class="text-secondary small">Full <span class="fw-bold text-error">Angular</span> frontend + Python FastAPI development.</p>
+                        </div>
+                        <div class="roadmap-item">
+                            <div class="roadmap-dot"></div>
+                            <h6 class="mb-1">Phase 3: Pilot</h6>
+                            <p class="text-secondary small">Testing with selected market intermediaries.</p>
+                        </div>
+                        <div class="roadmap-item mb-0">
+                            <div class="roadmap-dot" style="background: var(--primary-color); border-color: var(--primary-color);"></div>
+                            <h6 class="mb-1 text-primary-brand">Phase 4: National Scale</h6>
+                            <p class="text-secondary small mb-0">Industry-wide adoption and ecosystem integration.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 10 & 15: Hackathon Submission Summary & Tech Stack -->
+    <section id="summary">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-subtitle">Official Submission</span>
+                <h2>TechSprint 2026 Summary</h2>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="glass-card p-5" data-aos="fade-up">
+                        <div class="row g-5">
+                            
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <p class="text-secondary mb-1 small text-uppercase fw-bold">Project Title</p>
+                                    <h5>ComplyOS</h5>
+                                </div>
+                                <div class="mb-4">
+                                    <p class="text-secondary mb-1 small text-uppercase fw-bold">Theme</p>
+                                    <h5>Agentic AI in Financial Markets</h5>
+                                </div>
+                                <div class="mb-4">
+                                    <p class="text-secondary mb-1 small text-uppercase fw-bold">Problem Statement</p>
+                                    <h5 class="text-primary-brand">Agentic Compliance – From Regulatory Text to Operational Action</h5>
+                                </div>
+                                <div>
+                                    <p class="text-secondary mb-1 small text-uppercase fw-bold">Team Details</p>
+                                    <p class="text-primary fw-medium">Doing this project individually as a professional</p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <p class="text-secondary mb-2 small text-uppercase fw-bold">Conceptual Presentation Technology</p>
+                                    <div>
+                                        <span class="chip">HTML5</span>
+                                        <span class="chip">CSS3</span>
+                                        <span class="chip">Bootstrap 5</span>
+                                        <span class="chip">Vanilla JS</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <p class="text-secondary mb-2 small text-uppercase fw-bold">Production Tech Stack</p>
+                                    <div>
+                                        <span class="chip border-error text-error fw-bold">Angular</span>
+                                        <span class="chip border-primary-brand">TypeScript</span>
+                                        <span class="chip border-primary-brand">Python FastAPI</span>
+                                        <span class="chip border-primary-brand">PostgreSQL</span>
+                                        <span class="chip border-primary-brand">Redis</span>
+                                        <span class="chip border-primary-brand">Docker</span>
+                                        <span class="chip border-primary-brand">Azure</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <p class="text-secondary mb-2 small text-uppercase fw-bold">Agentic AI Stack</p>
+                                    <div>
+                                        <span class="chip border-accent">LLMs</span>
+                                        <span class="chip border-accent">RAG</span>
+                                        <span class="chip border-accent">Knowledge Graph</span>
+                                        <span class="chip border-accent">Vector Database</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 16: Closing Vision -->
+    <section id="closing" class="text-center" style="padding: 180px 0; border-top: 1px solid var(--glass-border); background: var(--bg-primary);">
+        <div class="container" data-aos="zoom-in" data-aos-duration="1200">
+            
+            <h2 class="display-3 mb-5 text-gradient">The Future of Compliance<br>is Autonomous.</h2>
+            
+            <div class="mt-5 pt-5">
+                <i data-lucide="hexagon" class="text-primary-brand mb-3" size="48"></i>
+                <h3 class="font-display fw-bold letter-spacing-tight mb-2 text-primary">COMPLYOS</h3>
+                <p class="text-secondary text-uppercase small mt-0" style="letter-spacing: 4px;">The Agentic Compliance Operating System</p>
+                <p class="text-accent mt-3 fw-medium" style="font-size: 0.95rem;">From Regulatory Text to Operational Action</p>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container text-center">
+            <p class="text-secondary mb-2">
+                Made with love by <strong class="text-primary">Mahesh Morde</strong> • <i data-lucide="phone" size="14" class="ms-1 me-1"></i> +91 9766228503
+            </p>
+            <a href="https://github.com/maheshmorde" target="_blank" class="text-secondary text-decoration-none d-inline-flex align-items-center gap-2 hover-primary transition">
+                <i data-lucide="github" size="18"></i> GitHub Profile
+            </a>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+        
+        // Initialize Animations
+        AOS.init({
+            once: true,
+            offset: 80,
+            duration: 800,
+            easing: 'ease-out-cubic'
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const html = document.documentElement;
+
+        themeToggle.addEventListener('click', () => {
+            if (html.getAttribute('data-theme') === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                themeIcon.setAttribute('data-lucide', 'sun');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                themeIcon.setAttribute('data-lucide', 'moon');
+            }
+            lucide.createIcons();
+        });
+
+        // Navbar blur and shadow on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            
+            if (window.scrollY > 50) {
+                navbar.style.background = isDark ? 'rgba(10, 10, 12, 0.95)' : 'rgba(248, 250, 252, 0.95)';
+                navbar.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+                navbar.style.borderBottom = '1px solid var(--glass-border)';
+            } else {
+                navbar.style.background = isDark ? 'rgba(10, 10, 12, 0.85)' : 'rgba(248, 250, 252, 0.85)';
+                navbar.style.boxShadow = 'none';
+                navbar.style.borderBottom = '1px solid var(--glass-border)';
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
