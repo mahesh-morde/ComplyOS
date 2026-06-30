@@ -302,27 +302,20 @@
             padding: 0 20px;
         }
 
-        /* 0s to 3s */
-        .step-1 { animation: heroText1 4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-        
-        /* 4s to 7s */
-        .step-2 { animation: heroText2 4s cubic-bezier(0.4, 0, 0.2, 1) 4s forwards; }
-        
-        /* 8s onwards */
-        .step-3 { animation: heroFinal 2s cubic-bezier(0.4, 0, 0.2, 1) 8s forwards; pointer-events: auto; }
+        /* 7-Step Cinematic Sequence */
+        .step-1 { animation: heroFadeInOut 3s cubic-bezier(0.4, 0, 0.2, 1) 0s forwards; }
+        .step-2 { animation: heroFadeInOut 3s cubic-bezier(0.4, 0, 0.2, 1) 2.5s forwards; }
+        .step-3 { animation: heroFadeInOut 3s cubic-bezier(0.4, 0, 0.2, 1) 5s forwards; }
+        .step-4 { animation: heroFadeInOut 3s cubic-bezier(0.4, 0, 0.2, 1) 7.5s forwards; }
+        .step-5 { animation: heroFadeInOut 4s cubic-bezier(0.4, 0, 0.2, 1) 10s forwards; }
+        .step-6 { animation: heroFadeInOut 4s cubic-bezier(0.4, 0, 0.2, 1) 13.5s forwards; }
+        .step-7 { animation: heroFinal 2s cubic-bezier(0.4, 0, 0.2, 1) 17s forwards; pointer-events: auto; }
 
-        @keyframes heroText1 {
-            0% { opacity: 0; transform: translateY(20px); filter: blur(5px); }
+        @keyframes heroFadeInOut {
+            0% { opacity: 0; transform: translateY(15px); filter: blur(5px); }
             15% { opacity: 1; transform: translateY(0); filter: blur(0); }
             85% { opacity: 1; transform: translateY(0); filter: blur(0); }
-            100% { opacity: 0; transform: translateY(-20px); filter: blur(5px); }
-        }
-
-        @keyframes heroText2 {
-            0% { opacity: 0; transform: translateY(20px); filter: blur(5px); }
-            15% { opacity: 1; transform: translateY(0); filter: blur(0); }
-            85% { opacity: 1; transform: translateY(0); filter: blur(0); }
-            100% { opacity: 0; transform: translateY(-20px); filter: blur(5px); }
+            100% { opacity: 0; transform: translateY(-15px); filter: blur(5px); }
         }
 
         @keyframes heroFinal {
@@ -491,26 +484,57 @@
         </div>
         
         <div class="hero-sequence-container">
-            <!-- Step 1 -->
+            <!-- 7-Step Sequence -->
             <div class="hero-step step-1">
                 <div class="container">
-                    <h2 class="display-4 fw-medium mx-auto text-primary" style="max-width: 1000px; line-height: 1.3;">
-                        Every new SEBI circular creates days of manual interpretation, coordination, and compliance effort.
+                    <h2 class="display-4 fw-medium mx-auto text-secondary" style="max-width: 1000px; line-height: 1.3;">
+                        A new SEBI circular is released.
                     </h2>
                 </div>
             </div>
             
-            <!-- Step 2 -->
             <div class="hero-step step-2">
                 <div class="container">
+                    <h2 class="display-4 fw-medium mx-auto text-secondary" style="max-width: 1000px; line-height: 1.3;">
+                        Legal teams read PDFs.
+                    </h2>
+                </div>
+            </div>
+            
+            <div class="hero-step step-3">
+                <div class="container">
+                    <h2 class="display-4 fw-medium mx-auto text-secondary" style="max-width: 1000px; line-height: 1.3;">
+                        Compliance teams create spreadsheets.
+                    </h2>
+                </div>
+            </div>
+            
+            <div class="hero-step step-4">
+                <div class="container">
+                    <h2 class="display-4 fw-medium mx-auto text-secondary" style="max-width: 1000px; line-height: 1.3;">
+                        Operations teams coordinate over email.
+                    </h2>
+                </div>
+            </div>
+            
+            <div class="hero-step step-5">
+                <div class="container">
+                    <h2 class="display-4 fw-bold mx-auto text-error" style="max-width: 1000px; line-height: 1.3;">
+                        Weeks later...<br><span class="text-secondary fw-medium" style="font-size: 2.5rem;">Compliance is finally complete.</span>
+                    </h2>
+                </div>
+            </div>
+            
+            <div class="hero-step step-6">
+                <div class="container">
                     <h2 class="display-3 fw-bold mx-auto text-gradient-primary" style="max-width: 1000px; line-height: 1.2;">
-                        What if regulations could become operational workflows automatically?
+                        What if this entire process took minutes instead of weeks?
                     </h2>
                 </div>
             </div>
 
-            <!-- Step 3: Final Reveal -->
-            <div class="hero-step step-3">
+            <!-- Step 7: Final Reveal -->
+            <div class="hero-step step-7">
                 <div class="container text-center">
                     <div class="chip mb-4 mx-auto border-primary-brand" style="background: rgba(126,34,206,0.05);">
                         <span class="text-primary-brand me-2">●</span> SEBI Securities Market TechSprint 2026
